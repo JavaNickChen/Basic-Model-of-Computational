@@ -1,0 +1,12 @@
+Create the action table.
+Number of states: 5 Number of input character: 5
+Execute: Start state= INIT
+trans: at clock 0 ori_state: INIT input : TURN ON next_state : RED
+trans: at clock 4 ori_state: RED input : TURN GREEN next_state : GREEN
+trans: at clock 7 ori_state: GREEN input : TURN YELLOW next_state : YELLOW
+trans: at clock 10 ori_state: YELLOW input : TURN RED next_state : RED
+Reach the end state.
+Create a viz graph.
+write 366 bytes to '≤‚ ‘Õº∆¨.gv'
+run ['dot', '-Kdot', '-Tpdf', '-O', '≤‚ ‘Õº∆¨.gv']
+view: '≤‚ ‘Õº∆¨.gv.pdf'
