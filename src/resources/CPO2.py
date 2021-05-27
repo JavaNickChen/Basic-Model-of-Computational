@@ -68,7 +68,8 @@ class interpreter:
                 elif line[0] == '#' and line[len(line) - 1] == '#':
                     lt = line.strip("\n").strip("#").split(",")
                     for e in lt:
-                        self.input_signal(e)
+                        es=e.split(" ")
+                        self.input_signal(es[0],es[1])
                 else:
                     lt = line.strip("\n").split(":")
                     at = lt[0].split("-->")
@@ -77,7 +78,7 @@ class interpreter:
                         return false
                     else:
                         self.add_trans(at[0], at[1], at[2], int(lt[1]))
-        return true
+        return True
 
     def create_action_table(self):
         """
@@ -161,13 +162,13 @@ class interpreter:
             self.input_count += 1
         self.trans_list.append([ins, inc, outs, times])
 
-    def input_signal(self, inc):
+    def input_signal(self, inc,time):
         """
         input a signal
         :param inc: input signal
         :return:
         """
-        self.input_queue[self.count] = inc
+        self.input_queue[self.count] = [inc,time]
         self.count += 1
 
     def execute(self):
@@ -183,42 +184,72 @@ class interpreter:
         self.count = 0
         timer = 0
         max_t = 0
+        next=None
+        next_clock = self.input_queue[0][1]
         while self.count < len(self.input_queue):
-            if self.state in self.end_state and self.input_queue[self.count] in self.end_input:
-                self.final = True
-                break
-            if timer < max_t:
-                timer += 1
-            else:
-                for s in self.input_list.keys():
-                    if self.input_list[s] == self.input_queue[self.count]:
-                        index = s
-                next = self.action_table[state_index][index]
-                if next == []:
-                    logger.error("Unknown state transition.")
-                    break
-                else:
-                    logger.info("trans: at clock " +
+            if timer >= max_t and next_clock==self.clock:
+                if self.state in self.end_state and self.input_queue[self.count][0] in self.end_input:
+                    logger.info("Terminal: at clock " +
                                 str(self.clock) +
-                                " ori_state: " +
+                                "\t,\tstate: " +
                                 str(self.state) +
-                                " input : " +
-                                str(self.input_list[index]) +
-                                " next_state : " +
-                                str(self.state_list[next[0]]))
+                                "\t,\tinput : " +
+                                str(self.input_queue[self.count][0]))
+                    self.final = True
+                    break
+                if not next:
+                    for s in self.input_list.keys():
+                        if self.input_list[s] == self.input_queue[self.count][0]:
+                            index = s
+                    next_clock = self.input_queue[self.count+1][1]
+                    next = self.action_table[state_index][index]
+                    if next == []:
+                        logger.error("Unknown state transition.")
+                        break
+                    max_t = next[1]
+                    timer = 0
+
+                else:
+
+                    for s in self.input_list.keys():
+                        if self.input_list[s] == self.input_queue[self.count][0]:
+                            index = s
+                    if len(self.input_queue)==self.count+1:
+                        next_clock = next_clock+10
+                    else:
+                        next_clock = self.input_queue[self.count + 1][1]
+                    next = self.action_table[state_index][index]
+                    if next == []:
+                        logger.error("Unknown state transition.")
+                        break
+                    max_t = next[1]
+                    timer = 0
+            elif timer == max_t:
+                logger.info("trans: at clock " +
+                            str(self.clock) +
+                            "\t,\tori_state: " +
+                            str(self.state) +
+                            "\t,\tinput : " +
+                            str(self.input_list[index]) +
+                            "\t,\tnext_state : " +
+                            str(self.state_list[next[0]]))
                 self.state = self.state_list[next[0]]
                 state_index = next[0]
-                max_t = next[1]
-                timer = 0
+                timer += 1
                 self.count += 1
-            self.clock += 1
+
+            else:
+                timer += 1
+                self.clock += 1
+
+
 
         if self.final:
             logger.info("Reach the end state.")
-            return true
+            return True
         else:
             logger.info("Not reach the end state.")
-            return false
+            return False
 
 
 if __name__ == "__main__":
@@ -241,11 +272,11 @@ if __name__ == "__main__":
     # intp.add_trans("RED", "TURN OFF", "OFF", 2)
     # intp.add_trans("GREEN", "TURN OFF", "OFF", 2)
     # intp.add_trans("YELLOW", "TURN OFF", "OFF", 2)
-    intp.input_signal("TURN ON")
-    intp.input_signal("TURN GREEN")
-    intp.input_signal("TURN YELLOW")
-    intp.input_signal("TURN RED")
-    intp.input_signal("TURN OFF")
+    intp.input_signal("TURN ON",0)
+    intp.input_signal("TURN GREEN",5)
+    intp.input_signal("TURN YELLOW",8)
+    intp.input_signal("TURN RED",11)
+    intp.input_signal("TURN OFF",15)
     intp.create_action_table()
     intp.end_state.append("RED")
     intp.end_input.append("TURN OFF")
