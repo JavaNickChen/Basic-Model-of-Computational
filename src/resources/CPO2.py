@@ -68,8 +68,8 @@ class interpreter:
                 elif line[0] == '#' and line[len(line) - 1] == '#':
                     lt = line.strip("\n").strip("#").split(",")
                     for e in lt:
-                        es=e.split(" ")
-                        self.input_signal(es[0],es[1])
+                        es = e.split(" ")
+                        self.input_signal(es[0], es[1])
                 else:
                     lt = line.strip("\n").split(":")
                     at = lt[0].split("-->")
@@ -162,13 +162,13 @@ class interpreter:
             self.input_count += 1
         self.trans_list.append([ins, inc, outs, times])
 
-    def input_signal(self, inc,time):
+    def input_signal(self, inc, time):
         """
         input a signal
         :param inc: input signal
         :return:
         """
-        self.input_queue[self.count] = [inc,time]
+        self.input_queue[self.count] = [inc, time]
         self.count += 1
 
     def execute(self):
@@ -184,10 +184,10 @@ class interpreter:
         self.count = 0
         timer = 0
         max_t = 0
-        next=None
+        next = None
         next_clock = self.input_queue[0][1]
         while self.count < len(self.input_queue):
-            if timer >= max_t and next_clock==self.clock:
+            if timer >= max_t and next_clock == self.clock:
                 if self.state in self.end_state and self.input_queue[self.count][0] in self.end_input:
                     logger.info("Terminal: at clock " +
                                 str(self.clock) +
@@ -201,7 +201,7 @@ class interpreter:
                     for s in self.input_list.keys():
                         if self.input_list[s] == self.input_queue[self.count][0]:
                             index = s
-                    next_clock = self.input_queue[self.count+1][1]
+                    next_clock = self.input_queue[self.count + 1][1]
                     next = self.action_table[state_index][index]
                     if next == []:
                         logger.error("Unknown state transition.")
@@ -214,8 +214,8 @@ class interpreter:
                     for s in self.input_list.keys():
                         if self.input_list[s] == self.input_queue[self.count][0]:
                             index = s
-                    if len(self.input_queue)==self.count+1:
-                        next_clock = next_clock+10
+                    if len(self.input_queue) == self.count + 1:
+                        next_clock = next_clock + 10
                     else:
                         next_clock = self.input_queue[self.count + 1][1]
                     next = self.action_table[state_index][index]
@@ -241,8 +241,6 @@ class interpreter:
             else:
                 timer += 1
                 self.clock += 1
-
-
 
         if self.final:
             logger.info("Reach the end state.")
@@ -272,11 +270,11 @@ if __name__ == "__main__":
     # intp.add_trans("RED", "TURN OFF", "OFF", 2)
     # intp.add_trans("GREEN", "TURN OFF", "OFF", 2)
     # intp.add_trans("YELLOW", "TURN OFF", "OFF", 2)
-    intp.input_signal("TURN ON",0)
-    intp.input_signal("TURN GREEN",5)
-    intp.input_signal("TURN YELLOW",8)
-    intp.input_signal("TURN RED",11)
-    intp.input_signal("TURN OFF",15)
+    intp.input_signal("TURN ON", 0)
+    intp.input_signal("TURN GREEN", 5)
+    intp.input_signal("TURN YELLOW", 8)
+    intp.input_signal("TURN RED", 11)
+    intp.input_signal("TURN OFF", 15)
     intp.create_action_table()
     intp.end_state.append("RED")
     intp.end_input.append("TURN OFF")
