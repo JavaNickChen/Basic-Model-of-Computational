@@ -15,7 +15,7 @@ logger.addHandler(ch)
 logger.addHandler(fh)
 
 
-class interpreter:
+class Interpreter:
     """
     This class is used to implement most of the functions of a simple eDSL interpreter
     """
@@ -75,7 +75,7 @@ class interpreter:
                     at = lt[0].split("-->")
                     if len(lt) != 2 or len(at) != 3:
                         logger.error("Input invalid.")
-                        return false
+                        return False
                     else:
                         self.add_trans(at[0], at[1], at[2], int(lt[1]))
         return True
@@ -84,13 +84,15 @@ class interpreter:
         """
         This function is used to construct a state transition table for the interpreter,
         and this method needs to be explicitly called to complete the creation before execution.
+        :return: None
         """
         state_num = self.state_count
         input_num = self.input_count
-        logger.info("Create the action table.")
+        logger.info("\nCreate the action table.")
         logger.info(
             "Number of states: " +
             str(state_num) +
+            "\t,\t" +
             " Number of input character: " +
             str(input_num))
         self.action_table = []
@@ -114,7 +116,7 @@ class interpreter:
         """
         This function creates a visual state transition diagram.
         You need to explicitly call create_action_table before use
-        :return:
+        :return: None
         """
         logger.info("Create a viz graph.")
         g = Digraph('测试图片')
@@ -128,7 +130,7 @@ class interpreter:
         """
         Add a new state to the interpreter
         :param state: new state
-        :return:
+        :return: None
         """
         self.state_list[self.state_count] = state
         self.state_count += 1
@@ -137,7 +139,7 @@ class interpreter:
         """
         Add a new input signal to the interpreter
         :param input: new input signal
-        :return:
+        :return: None
         """
         self.input_list[self.input_count] = input
         self.input_count += 1
@@ -149,7 +151,7 @@ class interpreter:
         :param inc: input signal
         :param outs: transferred state
         :param times: Time required for state transition
-        :return:
+        :return: None
         """
         if ins not in self.state_list.values():
             self.state_list[self.state_count] = ins
@@ -166,7 +168,7 @@ class interpreter:
         """
         input a signal
         :param inc: input signal
-        :return:
+        :return: None
         """
         self.input_queue[self.count] = [inc, time]
         self.count += 1
@@ -179,7 +181,7 @@ class interpreter:
         :return: true if Successfully reached the termination state and received the termination signal , otherwise false
         """
         self.state = self.state_list[0]
-        logger.info("Execute: Start state= " + self.state)
+        logger.info("Execute: \nStart state= " + self.state)
         state_index = 0
         self.count = 0
         timer = 0
@@ -225,9 +227,9 @@ class interpreter:
                     max_t = next[1]
                     timer = 0
             elif timer == max_t:
-                logger.info("trans: at clock " +
+                logger.info("transition: at clock " +
                             str(self.clock) +
-                            "\t,\tori_state: " +
+                            "\t,\tcurrent_state: " +
                             str(self.state) +
                             "\t,\tinput : " +
                             str(self.input_list[index]) +
@@ -251,8 +253,8 @@ class interpreter:
 
 
 if __name__ == "__main__":
-    intp = interpreter()
-    intp.input_from_file("test.txt")
+    intp = Interpreter()
+    intp.input_from_file("TrafficLight.txt")
     # intp.add_state("INIT")
     # intp.add_state("RED")
     # intp.add_state("YELLOW")

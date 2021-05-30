@@ -1,0 +1,2 @@
+state_1-->event_1-->state_2:2
+state_2-->event_2-->state_OFF:3
