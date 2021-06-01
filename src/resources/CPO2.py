@@ -59,7 +59,13 @@ class Interpreter:
             if not lines:
                 break
             for line in lines:
-                if line[0] == '$':
+                if line[0] == '>':
+                    lt = line.strip("\n").strip(">")
+                    self.end_input.append(lt)
+                elif line[0] == '<':
+                    lt = line.strip("\n").strip("<")
+                    self.end_state.append(lt)
+                elif line[0] == '$':
                     lt = line.strip("\n").strip("$")
                     self.add_state(lt)
                 elif line[0] == '%':
