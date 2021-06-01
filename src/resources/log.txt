@@ -1,13 +1,17 @@
+
 Create the action table.
-Number of states: 5 Number of input character: 5
-Execute: Start state= INIT
-trans: at clock 3	,	ori_state: INIT	,	input : TURN ON	,	next_state : RED
-trans: at clock 7	,	ori_state: RED	,	input : TURN GREEN	,	next_state : GREEN
-trans: at clock 10	,	ori_state: GREEN	,	input : TURN YELLOW	,	next_state : YELLOW
-trans: at clock 13	,	ori_state: YELLOW	,	input : TURN RED	,	next_state : RED
-Terminal: at clock 15	,	state: RED	,	input : TURN OFF
+Number of states: 5	,	 Number of input character: 3
+Execute: 
+Start state= INIT
+transition: at clock 0	,	current_state: INIT	,	input : a	,	next_state : a
+transition: at clock 1	,	current_state: a	,	input : b	,	next_state : b
+transition: at clock 2	,	current_state: b	,	input : c	,	next_state : c
+transition: at clock 3	,	current_state: c	,	input : a	,	next_state : a
+transition: at clock 4	,	current_state: a	,	input : b	,	next_state : b
+transition: at clock 5	,	current_state: b	,	input : c	,	next_state : c
+Terminal: at clock 6	,	state: c	,	input : c
 Reach the end state.
 Create a viz graph.
-write 366 bytes to '≤‚ ‘Õº∆¨.gv'
+write 383 bytes to '≤‚ ‘Õº∆¨.gv'
 run ['dot', '-Kdot', '-Tpdf', '-O', '≤‚ ‘Õº∆¨.gv']
 view: '≤‚ ‘Õº∆¨.gv.pdf'
