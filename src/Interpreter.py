@@ -125,7 +125,7 @@ class Interpreter:
         :return: None
         """
         logger.info("Create a viz graph.")
-        g = Digraph('测试图片')
+        g = Digraph('test_picture')
         for i in self.state_list:
             g.node(self.state_list[i], self.state_list[i])
         for t in self.trans_list:
@@ -173,7 +173,8 @@ class Interpreter:
     def input_signal(self, inc, time):
         """
         input a signal
-        :param inc: input signal
+        :param inc: input signal i.e. event
+        :param time: the time when the event takes effect.
         :return: None
         """
         self.input_queue[self.count] = [inc, time]
@@ -257,34 +258,3 @@ class Interpreter:
             logger.info("Not reach the end state.")
             return False
 
-
-if __name__ == "__main__":
-    intp = Interpreter()
-    intp.input_from_file("TrafficLight.txt")
-    # intp.add_state("INIT")
-    # intp.add_state("RED")
-    # intp.add_state("YELLOW")
-    # intp.add_state("GREEN")
-    # intp.add_state("OFF")
-    # intp.add_input("TURN ON")
-    # intp.add_input("TURN GREEN")
-    # intp.add_input("TURN YELLOW")
-    # intp.add_input("TURN RED")
-    # intp.add_input("TURN OFF")
-    # intp.add_trans("INIT","TURN ON","RED",3)
-    # intp.add_trans("RED","TURN GREEN","GREEN",2)
-    # intp.add_trans("GREEN","TURN YELLOW","YELLOW",2)
-    # intp.add_trans("YELLOW","TURN RED","RED",2)
-    # intp.add_trans("RED", "TURN OFF", "OFF", 2)
-    # intp.add_trans("GREEN", "TURN OFF", "OFF", 2)
-    # intp.add_trans("YELLOW", "TURN OFF", "OFF", 2)
-    intp.input_signal("TURN ON", 0)
-    intp.input_signal("TURN GREEN", 5)
-    intp.input_signal("TURN YELLOW", 8)
-    intp.input_signal("TURN RED", 11)
-    intp.input_signal("TURN OFF", 15)
-    intp.create_action_table()
-    intp.end_state.append("RED")
-    intp.end_input.append("TURN OFF")
-    intp.execute()
-    intp.create_graph()

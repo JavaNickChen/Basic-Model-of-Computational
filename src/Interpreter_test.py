@@ -1,10 +1,10 @@
 import unittest
 
-from src.resources.CPO2 import Interpreter
+from src.Interpreter import Interpreter
 
 
 class Lab2Test(unittest.TestCase):
-    # Using Traffic Light example for testing.
+    # Using Traffic Light example for a test case.
     def test_interpreter(self):
         # Test the interpreter for normal function.
         intp1 = Interpreter()
@@ -41,7 +41,7 @@ class Lab2Test(unittest.TestCase):
         lst = [['state_1', 'event_1', 'state_2', 2], ['state_2', 'event_2', 'state_OFF', 3]]
         self.assertEqual(intp.trans_list, lst)
 
-    # Recognize specific substring in a string.
+    # Recognize specific substring in a string for a test case.
     def test_interperter2(self):
         intp = Interpreter()
         intp.input_from_file("StringRecognition.txt")
@@ -56,6 +56,9 @@ class Lab2Test(unittest.TestCase):
         intp.create_graph()
         self.assertEqual(result, True)
 
+
+if __name__ == '__main__':
+    unittest.main()
 
 
 
