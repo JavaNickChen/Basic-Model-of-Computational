@@ -187,6 +187,10 @@ class Interpreter:
         and finally checks whether the termination state is reached and the termination input signal is obtained.
         :return: true if Successfully reached the termination state and received the termination signal , otherwise false
         """
+        for v in self.end_input:
+            logger.info("End input:" + str(v))
+        for v in self.end_state:
+            logger.info("End state:" + str(v))
         self.state = self.state_list[0]
         logger.info("Execute: \nStart state= " + self.state)
         state_index = 0
@@ -217,7 +221,10 @@ class Interpreter:
                         break
                     max_t = next[1]
                     timer = 0
-
+                    logger.info("receive signal: at clock " +
+                                str(self.clock) +
+                                "\t,\tinput : " +
+                                str(self.input_list[index]))
                 else:
 
                     for s in self.input_list.keys():
@@ -231,6 +238,10 @@ class Interpreter:
                     if next == []:
                         logger.error("Unknown state transition.")
                         break
+                    logger.info("receive signal: at clock " +
+                                str(self.clock) +
+                                "\t,\tinput : " +
+                                str(self.input_list[index]))
                     max_t = next[1]
                     timer = 0
             elif timer == max_t:
@@ -257,4 +268,3 @@ class Interpreter:
         else:
             logger.info("Not reach the end state.")
             return False
-

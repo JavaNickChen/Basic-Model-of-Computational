@@ -38,14 +38,16 @@ class Lab2Test(unittest.TestCase):
     def test_input_from_file(self):
         intp = Interpreter()
         intp.input_from_file("PytestExample.txt")
-        lst = [['state_1', 'event_1', 'state_2', 2], ['state_2', 'event_2', 'state_OFF', 3]]
+        lst = [['state_1', 'event_1', 'state_2', 2],
+               ['state_2', 'event_2', 'state_OFF', 3]]
         self.assertEqual(intp.trans_list, lst)
 
     # Recognize specific substring in a string for a test case.
     def test_interperter2(self):
         intp = Interpreter()
         intp.input_from_file("StringRecognition.txt")
-        # In the test, "input_str" consists of three lowercase letters:a, b and c.
+        # In the test, "input_str" consists of three lowercase letters:a, b and
+        # c.
         input_str = "abcabccbb"
         for index, element in enumerate(input_str):
             intp.input_signal(element, index)
@@ -59,8 +61,3 @@ class Lab2Test(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
