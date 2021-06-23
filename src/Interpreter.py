@@ -67,7 +67,7 @@ class Interpreter(Generic[VI]):
         # transition, and the state transition is read from it during execution
         self.action_table = []  # type: List
 
-    def typecheck(*type_args: Any, **type_kwargs: Any):
+    def typecheck(*type_args: Any, **type_kwargs: Any) -> Any:
         """
         This function is a decorator used to check the input parameter type
         :param type_args:One or more unnamed parameters passed in.
@@ -75,7 +75,7 @@ class Interpreter(Generic[VI]):
         :return:An example of a decorator used to check the input type.
         """
 
-        def decorator(func):
+        def decorator(func) :
             sig = signature(func)
             bound_types = sig.bind_partial(*type_args, **type_kwargs).arguments
 
@@ -95,7 +95,7 @@ class Interpreter(Generic[VI]):
         return decorator
 
     @typecheck(filename=str)
-    def input_from_file(self, filename: str):
+    def input_from_file(self, filename: str) -> bool:
         """
         This function provides a way to input from a file
         :param filename: File location
@@ -228,7 +228,7 @@ class Interpreter(Generic[VI]):
         self.input_queue[self.count] = [inc, time]
         self.count += 1
 
-    def execute(self):
+    def execute(self) -> bool:
         """
         This function inputs the signals in the order in input_queue, executes the process,
         the state transition by matching the state in the state transition table,
@@ -245,7 +245,7 @@ class Interpreter(Generic[VI]):
         self.count = 0
         timer = 0
         max_t = 0
-        next = None
+        next = None # type: Any
         next_clock = self.input_queue[0][1]
         while self.count < len(self.input_queue):
             if timer >= max_t and next_clock == self.clock:
