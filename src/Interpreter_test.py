@@ -4,7 +4,27 @@ from Interpreter import Interpreter
 
 
 class Lab2Test(unittest.TestCase):
-    # Using Traffic Light example for a test case.
+
+    # Test inputting event/state table from file.
+    def test_input_from_file(self):
+        intp = Interpreter()
+        intp.input_from_file("PytestExample.txt")
+        lst = [['state_1', 'event_1', 'state_2', 2],
+               ['state_2', 'event_2', 'state_OFF', 3]]
+        self.assertEqual(intp.trans_list, lst)
+
+    # Unit tests for input data validation in aspect-oriented style.
+    def test_aspect_oriented_valid(self):
+
+        @Interpreter.typecheck(a=int)
+        def inc(a):
+            return a + 1
+        # Pass in a variable that meets the criteria —— The variable's type is int.
+        self.assertEqual(inc(2), 3)
+        # A variable that does not qualify is passed in. The variable's type is character, not int.
+        self.assertRaises(TypeError, inc, 'b')
+
+        # Test for using Traffic Light example.
     def test_interpreter(self):
         # Test the interpreter for normal function.
         # To configure the state machine.
@@ -35,15 +55,7 @@ class Lab2Test(unittest.TestCase):
 
         self.assertEqual(intp2.execute(), False)
 
-    # Test inputting event/state table from file.
-    def test_input_from_file(self):
-        intp = Interpreter()
-        intp.input_from_file("PytestExample.txt")
-        lst = [['state_1', 'event_1', 'state_2', 2],
-               ['state_2', 'event_2', 'state_OFF', 3]]
-        self.assertEqual(intp.trans_list, lst)
-
-    # Recognize specific substring in a string for a test case.
+    # Test for recognizing specific substring in a string.
     def test_interperter2(self):
         # To configure the state machine.
         intp = Interpreter()
@@ -61,7 +73,7 @@ class Lab2Test(unittest.TestCase):
 
         self.assertEqual(result, True)
 
-    # Words counting and words extracting of text parsing
+    # Test for words counting and words extracting of text parsing.
     def test_interpreter3(self):
         # To configure the state machine.
         intp = Interpreter()

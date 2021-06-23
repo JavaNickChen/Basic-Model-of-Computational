@@ -1,4 +1,6 @@
 
+Argument a must be <class 'int'>
+
 Create the action table.
 Number of states: 5	,	 Number of input character: 3
 End input:c
@@ -23,3 +25,139 @@ Create a viz graph.
 write 394 bytes to 'generated_picture.gv'
 run ['dot', '-Kdot', '-Tpdf', '-O', 'generated_picture.gv']
 view: 'generated_picture.gv.pdf'
+
+Create the action table.
+Number of states: 5	,	 Number of input character: 5
+End input:TURN OFF
+End state:RED
+Execute: 
+Start state= INIT
+receive signal: at clock 0	,	input : TURN ON
+transition: at clock 3	,	current_state: INIT	,	input : TURN ON	,	next_state : RED
+receive signal: at clock 5	,	input : TURN GREEN
+transition: at clock 7	,	current_state: RED	,	input : TURN GREEN	,	next_state : GREEN
+receive signal: at clock 8	,	input : TURN YELLOW
+transition: at clock 10	,	current_state: GREEN	,	input : TURN YELLOW	,	next_state : YELLOW
+receive signal: at clock 11	,	input : TURN RED
+transition: at clock 13	,	current_state: YELLOW	,	input : TURN RED	,	next_state : RED
+Terminal: at clock 15	,	state: RED	,	input : TURN OFF
+Reach the end state.
+
+Create the action table.
+Number of states: 5	,	 Number of input character: 5
+End input:TURN OFF
+End state:RED
+Execute: 
+Start state= INIT
+Unknown state transition.
+Not reach the end state.
+Input invalid.
+
+Create the action table.
+Number of states: 4	,	 Number of input character: 59
+End input:#
+End state:Word
+Execute: 
+Start state= INIT
+receive signal: at clock 0	,	input : H
+transition: at clock 0	,	current_state: INIT	,	input : H	,	next_state : Character
+receive signal: at clock 1	,	input : e
+transition: at clock 1	,	current_state: Character	,	input : e	,	next_state : Character
+receive signal: at clock 2	,	input : l
+transition: at clock 2	,	current_state: Character	,	input : l	,	next_state : Character
+receive signal: at clock 3	,	input : l
+transition: at clock 3	,	current_state: Character	,	input : l	,	next_state : Character
+receive signal: at clock 4	,	input : o
+transition: at clock 4	,	current_state: Character	,	input : o	,	next_state : Character
+receive signal: at clock 5	,	input : ,
+transition: at clock 5	,	current_state: Character	,	input : ,	,	next_state : Word
+receive signal: at clock 6	,	input :  
+transition: at clock 6	,	current_state: Word	,	input :  	,	next_state : Word
+receive signal: at clock 7	,	input : w
+transition: at clock 7	,	current_state: Word	,	input : w	,	next_state : Character
+receive signal: at clock 8	,	input : o
+transition: at clock 8	,	current_state: Character	,	input : o	,	next_state : Character
+receive signal: at clock 9	,	input : r
+transition: at clock 9	,	current_state: Character	,	input : r	,	next_state : Character
+receive signal: at clock 10	,	input : l
+transition: at clock 10	,	current_state: Character	,	input : l	,	next_state : Character
+receive signal: at clock 11	,	input : d
+transition: at clock 11	,	current_state: Character	,	input : d	,	next_state : Character
+receive signal: at clock 12	,	input : !
+transition: at clock 12	,	current_state: Character	,	input : !	,	next_state : Word
+receive signal: at clock 13	,	input :  
+transition: at clock 13	,	current_state: Word	,	input :  	,	next_state : Word
+receive signal: at clock 14	,	input : I
+transition: at clock 14	,	current_state: Word	,	input : I	,	next_state : Character
+receive signal: at clock 15	,	input :  
+transition: at clock 15	,	current_state: Character	,	input :  	,	next_state : Word
+receive signal: at clock 16	,	input : l
+transition: at clock 16	,	current_state: Word	,	input : l	,	next_state : Character
+receive signal: at clock 17	,	input : o
+transition: at clock 17	,	current_state: Character	,	input : o	,	next_state : Character
+receive signal: at clock 18	,	input : v
+transition: at clock 18	,	current_state: Character	,	input : v	,	next_state : Character
+receive signal: at clock 19	,	input : e
+transition: at clock 19	,	current_state: Character	,	input : e	,	next_state : Character
+receive signal: at clock 20	,	input :  
+transition: at clock 20	,	current_state: Character	,	input :  	,	next_state : Word
+receive signal: at clock 21	,	input : o
+transition: at clock 21	,	current_state: Word	,	input : o	,	next_state : Character
+receive signal: at clock 22	,	input : b
+transition: at clock 22	,	current_state: Character	,	input : b	,	next_state : Character
+receive signal: at clock 23	,	input : j
+transition: at clock 23	,	current_state: Character	,	input : j	,	next_state : Character
+receive signal: at clock 24	,	input : e
+transition: at clock 24	,	current_state: Character	,	input : e	,	next_state : Character
+receive signal: at clock 25	,	input : c
+transition: at clock 25	,	current_state: Character	,	input : c	,	next_state : Character
+receive signal: at clock 26	,	input : t
+transition: at clock 26	,	current_state: Character	,	input : t	,	next_state : Character
+receive signal: at clock 27	,	input : -
+transition: at clock 27	,	current_state: Character	,	input : -	,	next_state : Character
+receive signal: at clock 28	,	input : o
+transition: at clock 28	,	current_state: Character	,	input : o	,	next_state : Character
+receive signal: at clock 29	,	input : r
+transition: at clock 29	,	current_state: Character	,	input : r	,	next_state : Character
+receive signal: at clock 30	,	input : i
+transition: at clock 30	,	current_state: Character	,	input : i	,	next_state : Character
+receive signal: at clock 31	,	input : e
+transition: at clock 31	,	current_state: Character	,	input : e	,	next_state : Character
+receive signal: at clock 32	,	input : n
+transition: at clock 32	,	current_state: Character	,	input : n	,	next_state : Character
+receive signal: at clock 33	,	input : t
+transition: at clock 33	,	current_state: Character	,	input : t	,	next_state : Character
+receive signal: at clock 34	,	input : e
+transition: at clock 34	,	current_state: Character	,	input : e	,	next_state : Character
+receive signal: at clock 35	,	input : d
+transition: at clock 35	,	current_state: Character	,	input : d	,	next_state : Character
+receive signal: at clock 36	,	input :  
+transition: at clock 36	,	current_state: Character	,	input :  	,	next_state : Word
+receive signal: at clock 37	,	input : P
+transition: at clock 37	,	current_state: Word	,	input : P	,	next_state : Character
+receive signal: at clock 38	,	input : r
+transition: at clock 38	,	current_state: Character	,	input : r	,	next_state : Character
+receive signal: at clock 39	,	input : o
+transition: at clock 39	,	current_state: Character	,	input : o	,	next_state : Character
+receive signal: at clock 40	,	input : g
+transition: at clock 40	,	current_state: Character	,	input : g	,	next_state : Character
+receive signal: at clock 41	,	input : r
+transition: at clock 41	,	current_state: Character	,	input : r	,	next_state : Character
+receive signal: at clock 42	,	input : a
+transition: at clock 42	,	current_state: Character	,	input : a	,	next_state : Character
+receive signal: at clock 43	,	input : m
+transition: at clock 43	,	current_state: Character	,	input : m	,	next_state : Character
+receive signal: at clock 44	,	input : m
+transition: at clock 44	,	current_state: Character	,	input : m	,	next_state : Character
+receive signal: at clock 45	,	input : i
+transition: at clock 45	,	current_state: Character	,	input : i	,	next_state : Character
+receive signal: at clock 46	,	input : n
+transition: at clock 46	,	current_state: Character	,	input : n	,	next_state : Character
+receive signal: at clock 47	,	input : g
+transition: at clock 47	,	current_state: Character	,	input : g	,	next_state : Character
+receive signal: at clock 48	,	input : !
+transition: at clock 48	,	current_state: Character	,	input : !	,	next_state : Word
+receive signal: at clock 49	,	input :  
+transition: at clock 49	,	current_state: Word	,	input :  	,	next_state : Word
+Terminal: at clock 50	,	state: Word	,	input : #
+Reach the end state.
