@@ -1,6 +1,6 @@
 import unittest
 
-from src.Interpreter import Interpreter
+from Interpreter import Interpreter
 
 
 class Lab2Test(unittest.TestCase):
