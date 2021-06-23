@@ -1,0 +1,25 @@
+
+Create the action table.
+Number of states: 5	,	 Number of input character: 3
+End input:c
+End state:c
+Execute: 
+Start state= INIT
+receive signal: at clock 0	,	input : a
+transition: at clock 0	,	current_state: INIT	,	input : a	,	next_state : a
+receive signal: at clock 1	,	input : b
+transition: at clock 1	,	current_state: a	,	input : b	,	next_state : b
+receive signal: at clock 2	,	input : c
+transition: at clock 2	,	current_state: b	,	input : c	,	next_state : c
+receive signal: at clock 3	,	input : a
+transition: at clock 3	,	current_state: c	,	input : a	,	next_state : a
+receive signal: at clock 4	,	input : b
+transition: at clock 4	,	current_state: a	,	input : b	,	next_state : b
+receive signal: at clock 5	,	input : c
+transition: at clock 5	,	current_state: b	,	input : c	,	next_state : c
+Terminal: at clock 6	,	state: c	,	input : c
+Reach the end state.
+Create a viz graph.
+write 394 bytes to 'generated_picture.gv'
+run ['dot', '-Kdot', '-Tpdf', '-O', 'generated_picture.gv']
+view: 'generated_picture.gv.pdf'
